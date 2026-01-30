@@ -74,6 +74,8 @@ func HandleServiceErrors(w http.ResponseWriter, err error) {
 		WriteError(w, http.StatusConflict, "user with email already exists")
 	case errors.Is(err, services.ErrInvalidCredentials):
 		WriteError(w, http.StatusUnauthorized, "invalid email or password")
+	case errors.Is(err, services.ErrPasswordTooLong):
+		WriteError(w, http.StatusBadRequest, "password is too long")
 	case errors.Is(err, services.ErrInternal):
 		fallthrough
 	default:
