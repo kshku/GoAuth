@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
+	"errors"
 
 	_ "github.com/lib/pq"
 )
@@ -18,7 +19,7 @@ func InitDB() error {
 	dbName := os.Getenv("DB_NAME")
 
 	if dbHost == "" || dbPort == "" || dbUser == "" || dbPassword == "" || dbName == "" {
-		panic("DB related environment variables are not set")
+		return errors.New("DB related env vars are not set")
 	}
 
 	conStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", dbHost, dbPort, dbUser, dbPassword, dbName)

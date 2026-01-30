@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"go_auth/internal/services"
 	"go_auth/internal/routes"
 	"go_auth/internal/db"
 
@@ -19,6 +20,10 @@ func main() {
 
 	if err := db.InitDB(); err != nil {
 		log.Fatalf("Failed to init db: %w", err)
+	}
+
+	if err := services.InitJWT(); err != nil {
+		log.Fatalf("Failed to start server: %w", err)
 	}
 
 	mux := http.NewServeMux()

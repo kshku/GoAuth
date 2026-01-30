@@ -50,7 +50,10 @@ func RegisterNewUser(ctx context.Context, data *RegisterUserData) (*RegisterUser
 		return nil, ErrInternal
 	}
 
-	token := ""
+	token, err := GenerateJWT(user.ID, user.Email)
+	if err != nil {
+		return nil, ErrInternal
+	}
 
 	return &RegisterUserResponse{
 		Name: user.Name,
@@ -71,7 +74,10 @@ func LoginUser(ctx context.Context, data *LoginUserData) (*LoginUserResponse, er
 		return nil, ErrInvalidCredentials
 	}
 
-	token:= ""
+	token, err := GenerateJWT(user.ID, user.Email)
+	if err != nil {
+		return nil, ErrInternal
+	}
 
 	return &LoginUserResponse{
 		Name: user.Name,
