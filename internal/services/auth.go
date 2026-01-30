@@ -14,6 +14,7 @@ type RegisterUserData struct {
 }
 
 type RegisterUserResponse struct {
+	ID int
 	Name string
 	Email string
 	Token string
@@ -56,6 +57,7 @@ func RegisterNewUser(ctx context.Context, data *RegisterUserData) (*RegisterUser
 	}
 
 	return &RegisterUserResponse{
+		ID: user.ID,
 		Name: user.Name,
 		Email: user.Email,
 		Token: token,
@@ -80,6 +82,7 @@ func LoginUser(ctx context.Context, data *LoginUserData) (*LoginUserResponse, er
 	}
 
 	return &LoginUserResponse{
+		ID: user.ID,
 		Name: user.Name,
 		Email: user.Email,
 		Token: token,

@@ -37,7 +37,9 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.WriteData(w, http.StatusCreated, map[string]interface{}{
-		"user": map[string]string{
+		"user": map[string]interface{}{
+			// I know should not use ID as int
+			"id": response.ID,
 			"name": response.Name,
 			"email": response.Email,
 		},
@@ -63,7 +65,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.WriteData(w, http.StatusOK, map[string]interface{}{
-		"user": map[string]string{
+		"user": map[string]interface{}{
+			// I know should not use ID as int
+			"id": response.ID,
 			"name": response.Name,
 			"email": response.Email,
 		},
